@@ -94,20 +94,6 @@ public:
 
 
 
-	//动态分配内存
-	//class SeqList {
-	//public:
-	//	ElemType* data;
-	//	int length;
-	//
-	//}
-	//SeqList* initList() {
-	//	//创建对象
-	//	SeqList* list = new SeqList;
-	//	list->data = new  ElemType[NUM]；
-	//	litst->length = 0;
-	//	return list;
-	//}
 
 
 
