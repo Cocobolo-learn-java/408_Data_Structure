@@ -39,8 +39,14 @@ public:
 	//插入元素
 	void insertElem(SeqList& list, int pos, int num) // (SeqList& list , int pos , ElemType element )
 	{
+		// 判断顺序表是否已满
+		if (list.length >= MAXSIZE)
+		{
+		     cout << "顺序表已满，无法插入" << endl;
+		     return;
+	    }
 		//判断范围合法性
-		if (pos <= list.length) 
+		if (pos <= list.length + 1  && pos >= 1) 
 		{	
 			for (int i = list.length - 1; i >= pos - 1; i--) 
 			{
@@ -48,14 +54,15 @@ public:
 			}
 			//赋值
 			list.data[pos - 1] = num;
-
+			//长度+1
+			list.length++;
 		}
-		//长度+1
-		list.length++;                  //插入最好时间复杂度0(1),最坏复杂度0(n)
+		return;
+		                  //插入最好时间复杂度0(1),最坏复杂度0(n)
 	}
 
-	//删除元素
-	int deleteElem(SeqList& list, int pos , int num)   //  ElemType deleteNum(SeqList& list, int pos, ElemType num)
+	//删除元素，并且返回删除元素的值
+	int deleteElem(SeqList& list, int pos )   //  ElemType deleteNum(SeqList& list, int pos, ElemType num)
 	{	
 		//判断顺序表是否为空
 		if (list.length == 0)
@@ -64,18 +71,19 @@ public:
 			return -1;
 		}
 		//判断范围合法性
-		if (pos >= 0 && pos <= length) 
+		if (pos >= 1 && pos <= list.length) 
 		{	
-			int num = list.data[pos - 1];       //ElemType num = list.data[pos-1];
+			int temp = list.data[pos - 1];       //ElemType num = list.data[pos-1];
 			for (int i = pos; i < list.length; i++) 
 			{
 				list.data[i - 1] = list.data[i];
 			}
 			//长度减小1
 			list.length--;  
-			//返回值
-			return num;
+			
+			return temp;
 		}
+		return -1;
 	}
 
 	//查找元素在顺序表中的位置
@@ -90,7 +98,9 @@ public:
 				return i + 1;
 			}
 		}
+		return -1;
 	}
+
 
 
 
