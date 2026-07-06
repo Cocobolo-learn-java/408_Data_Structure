@@ -1,0 +1,29 @@
+#include  <iostream>
+using namespace std;
+#define MAXSIZE 100
+class SeqList {
+public:
+	int length;
+	int data[MAXSIZE];    //ElemType data[MAXSIZE];  #pragma once
+};
+
+
+
+//已知线性表(a1, a2, ..., an) 按顺序结构存储且每个元素为不相等的整数，设计把所有奇数移动到所有偶数前边的算法。
+//例如，A = (1, 2, 3, 4, 5, 6, 7)，移动后变为 A = (1, 7, 3, 5, 4, 6, 2)（要求时间最少，辅助空间最少）。
+
+void sortOddList(SeqList& list ) {
+	int left = 0, right = list.length - 1;
+	while (left < right) 
+	{	
+		//找到一对奇偶进行互换
+		while (left < right && list.data[left] % 2 == 1) { left++; }
+		while (left < right && list.data[right] % 2 == 0) { right--; }
+		if (left < right) {
+			int temp = list.data[left];
+			list.data[left] = list.data[right];
+			list.data[right] = temp;
+		}
+		
+	}
+}
