@@ -101,6 +101,31 @@ public:
 		return -1;
 	}
 
+	//二分查找
+	int searchMide(SeqList& list , int num) {
+		
+		int right = list.length - 1, left = 0;
+	
+		while (left <= right )
+		{	
+			int mid = (right + left) / 2;
+			if (list.data[mid] == num) {
+				return mid + 1;
+			}
+			if (list.data[mid] < num) 
+			{
+				left = mid + 1;
+			}
+			if(list.data[mid] > num)
+			{
+				right = mid - 1;
+			}
+		}
+	
+	
+	
+	}
+
 
 
 
