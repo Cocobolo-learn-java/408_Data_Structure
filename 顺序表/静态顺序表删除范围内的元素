@@ -1,0 +1,41 @@
+#include  <iostream>
+using namespace std;
+#define MAXSIZE 100
+class SeqList {
+public:
+	int length;
+	int data[MAXSIZE];    //ElemType data[MAXSIZE];  #pragma once
+};
+
+
+
+
+
+
+//-对长度为 n 的顺序表 L，编写一个时间复杂度为 O(n)、空间复杂度为 O(1) 的算法，该算法删除顺序表中所有值为 x 的数据元素。
+//
+//- 设计一个算法，从给定的顺序表 L 中删除元素值在 x 到 y(x <= y) 之间的所有元素，要求以较高的效率来实现，空间复杂度为 O(1)。
+//
+//- 从有序顺序表中删除所有其值重复的元素，使表中所有元素的值均不同。
+void deleteNumArea(SeqList& list,int x , int y) 
+{
+	int count = 0;
+	for (int i = 0; i < list.length; i++) 
+	{
+		if (list.data[i] >= x && list.data[i] <= y) 
+		{
+			count++;
+		}
+		else 
+		{
+			list.data[i - count] = list.data[i];
+		}
+	}
+	list.length -= count;
+
+
+
+
+
+
+}
