@@ -67,7 +67,8 @@ public:
 
 Node* findSameTail(Node* str1 , Node* str2) 
 {	
-	//默认str1、str2不为空
+	//判断str1,str2是否为空
+	if (str1 == NULL || str2 == NULL) { return NULL; }
 	int count1 = 0, count2 = 0, differ = 0;
 	Node* q = str1->next;
 	Node* p = str2->next; 
