@@ -143,3 +143,38 @@ Node* deleteSamedata(Node* head,int n)
 	
 }
 
+
+
+
+单链表反转
+
+class Node {
+public:
+	Node* next;
+	int data;
+};
+
+void reverse(Node* head)
+{
+	Node* first = NULL;
+	Node* second = head->next;
+	Node* third;
+	
+	while (second != NULL) 
+	{
+		third = second->next;
+		second->next = first;
+		first = second;
+		second = third;
+	}
+
+	Node* newHead = new Node();
+	newHead->next = first;
+
+}
+
+
+
+
+
+
