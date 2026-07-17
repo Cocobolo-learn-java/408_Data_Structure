@@ -37,3 +37,65 @@ int  findLastKNode(Node* head, int k)
 	cout << slow->data << endl;
 	return 1;
 }
+
+
+
+
+
+
+
+[2012] 假定采用带头节点的单链表保存单词，当两个单词有相同的后缀时，则可共享相同的后缀存储空间，例如，"loading"和"being"的存储映像如下图所示。
+
+str1 → l → o → a → d → i → n → g
+str2 → b → e → i → n → g
+
+设 str1 和 str2 分别指向两个单词所在单链表的头节点，链表结点结构为 data | next
+
+请设计一个时间上尽可能高效的算法，找出由 str1 和 str2 所指向两个链表共同后缀的起始位置（如图字符 i 所在结点的位置 p）。要求：
+
+1：描述算法的基本设计思想；
+
+2：根据设计思想，采用 C 或 C++ 或 Java 语言描述，关键之处给出注释；
+
+3：说明你所设计算法的时间复杂度。
+class Node
+{
+public:
+	int data;
+	Node* next;
+};
+
+Node* findSameTail(Node* str1 , Node* str2) 
+{	
+	//默认str1、str2不为空
+	int count1 = 0, count2 = 0, differ = 0;
+	Node* q = str1->next;
+	Node* p = str2->next; 
+	while (str1->next != NULL) { str1 = str1->next; count1++; }   //得到str1 整条链表长度
+	while (str2->next != NULL) { str2 = str2->next; count2++; }   //得到str2 整条链表长度
+	if (count1 > count2)
+	{	
+		differ = count1 - count2; 
+		for (int i = 0; i < differ; i++) { q = q->next; }
+		while (q!= NULL && p != NULL) { 
+			if (q == p) { return p; }
+			q = q->next;
+			p = p->next;
+		}
+	
+	}
+	else
+	{ 
+		differ = count2 - count1;
+		for (int i = 0; i < differ; i++) { p = p->next; }
+		while (q != NULL && p != NULL) {
+			if (q == p) { return p; }
+			q = q->next;
+			p = p->next;
+		}	
+	}
+	return NULL;
+}
+
+
+
