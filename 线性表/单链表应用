@@ -98,5 +98,48 @@ Node* findSameTail(Node* str1 , Node* str2)
 	return NULL;
 }
 
+[2015]（15分）用单链表保存n个整数，结点的结构为[data][link]，且 | data | ≤ n（n为正整数）。
+ 现要求设计一个时间复杂度尽可能高效的算法，对于链表中data的绝对值相等的节点，仅保留第一次出现的节点而删除其余绝对值相等的结点。例如，若给定单链表head如下：
+head → 21 → - 15 → - 15 → - 7 → 15 
+则删除节点后的head为 head → 21 → - 15 → - 7
+要求：	
+1）给出算法的基本设计思想。
+2）使用C或C++语言，给出单链表节点的数据类型定义。
+3）根据设计思想，采用C或C++语言描述算法，关键之处给出注释。
+4）说明你所设计算法的时间复杂度和空间复杂度。
+class Node {
+public:
+	int data;
+	Node* link;
+};
 
+Node* deleteSamedata(Node* head,int n) 
+{	
+	// 处理空链表
+	if (head == NULL) {
+		return NULL;
+	}
+	int* arr = new int[n + 1]();  //初始化数组
+	int num;
+	Node* p = head;      
+	while (p->link != NULL)
+	{
+		//删除结点需要找到前置结点
+		num = abs(p->link->data);   //获取下一个结点存储的数据
+		if (*(arr + num) == 0)      //查询是否已重复
+		{
+			*(arr + num) = 1;  
+			p = p->link;
+		}
+		else 
+		{
+			Node* temp = p->link;  //删除下一个结点
+			p->link = temp->link;     
+			delete temp;
+		}
+	}
+	delete[] arr;   //删除数组
+	return p;
+	
+}
 
