@@ -175,6 +175,29 @@ void reverse(Node* head)
 
 
 
+删除中间节点
+class Node {
+public:
+	Node* next;
+	int data;
+};
+
+void deleteMidNode(Node* head) 
+{
+	Node* fast = head->next;
+	Node* slow = head;
+	while (fast != NULL && fast->next != NULL) 
+	{
+		fast = fast->next->next;
+		slow = slow->next;
+	}
+	Node* q = slow->next;
+	slow->next = q->next;
+	delete q;
+	return;
+}
+
+
 
 
 
