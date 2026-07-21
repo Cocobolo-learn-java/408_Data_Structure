@@ -199,5 +199,71 @@ void deleteMidNode(Node* head)
 
 
 
+[2019]（13分）设线性表L = (a₁, a₂, a₃, ..., aₙ₋₂, aₙ₋₁, aₙ)采用带头节点的单链表保存，链表中的节点定义如下：
+
+typedef struct node
+{
+    int data;
+    struct node* next;
+} NODE;
+
+请设计一个空间复杂度为 O(1) 且时间上尽可能高效的算法，重新排列 L 中的各节点，得到线性表 L' = (a₁, aₙ, a₂, aₙ₋₁, a₃, aₙ₋₂, ...)。要求：
+
+1）给出算法的基本设计思想。
+2）根据设计思想，采用 C 或 C++ 语言描述算法，关键之处给出注释。
+3）说明你所设计算法的时间复杂度。
+class Node {
+public:
+	int data;
+	Node* next;
+};
+
+void func(Node* head) 
+{
+	//找到中心节点
+	Node* fast = head->next;
+	Node* slow = head;
+	while (fast != NULL && fast ->next != NULL) 
+	{
+		slow = slow->next;
+		fast = fast->next->next; //快指针走两步
+	}
+
+	Node* second = slow->next; //找到中心结点
+	Node* first = NULL;
+	Node* third = NULL;
+	slow->next = NULL; // 断开
+	//反转断开后的后半部分链表
+	while (second != NULL) 
+	{
+		third = second->next;
+		second->next = first;
+		first = second;
+		second = third;
+	}
+
+	//后半段链表插入前半段链表
+	Node* p1 = head->next;
+	Node* q1 = first; //first成为头结点
+	Node* p2 = NULL;
+	Node* q2 = NULL;
+	while (p1 != NULL && q1 != NULL) 
+	{
+		p2 = p1->next;
+		q2 = q1->next;
+		p1->next = q1;
+		q1->next = p2;
+		q1 = q2;
+		p1 = p2;
+
+	}
+
+}
+
+
+
+
+
+
 
 
