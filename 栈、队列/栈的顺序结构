@@ -40,3 +40,16 @@ int main() {
     delete s;
     return 0;
 }
+
+// 栈的顺序结构 - 获取栈顶元素
+int getTop(Stack *s, ElemType *e)
+{
+    if (s->top == -1)           // 判断栈是否为空
+    {
+        printf("空的\n");
+        return 0;               // 返回 0 表示获取失败
+    }
+
+    *e = s->data[s->top];       // 通过指针返回栈顶元素的值
+    return 1;                   // 返回 1 表示获取成功
+}
