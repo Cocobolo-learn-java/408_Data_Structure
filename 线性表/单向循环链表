@@ -1,0 +1,64 @@
+#include <iostream>
+using namespace std;
+
+class Node {
+public:
+	Node* next;
+	int data;   //ElemType data;
+};
+
+
+//判断单向循环链表是否有环
+
+bool isCircle(Node* head) 
+{
+	Node* fast = head;
+	Node* slow = head;
+
+	while (fast != NULL && fast->next != NULL)
+	{
+		fast = fast->next->next;    //快指针步长是慢指针的两倍
+		slow = slow->next;
+		if (fast == slow) 
+		{
+			return true;
+		}
+	}
+	return false;
+}
+
+//找到单向循环链表的入口
+Node* findEntrance(Node* head) 
+{
+	Node* fast = head;
+	Node* slow = head;
+	while (fast != NULL && fast->next != NULL) 
+	{
+		fast = fast->next->next;
+		slow = slow->next;
+		if (fast == slow)   
+		{
+			
+			int count = 1;
+			while (fast -> next != slow)
+			{
+				count++;
+				fast = fast->next;
+			}
+			fast = head;
+			slow = head;
+			for (int i = 0; i < count; i++)
+			{
+				fast = fast->next;
+			}
+			while (fast != slow) 
+			{
+				slow = slow->next;
+				fast = fast->next;
+			}
+			return fast;
+		}
+	}
+	return NULL;
+}
+	
