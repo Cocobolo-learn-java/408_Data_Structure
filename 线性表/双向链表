@@ -1,0 +1,83 @@
+#include <iostream>
+using namespace std;
+
+class Node {
+public:
+	int data;
+	Node* next;
+	Node* pre;
+};
+
+//头插法
+void insertHead(Node* head , int num)  //(Node* head , ElemType num)
+{
+	Node* node = new Node();
+	node->data = num;
+	node->pre = head;
+	node->next = head->next;
+	if (head->next != NULL) 
+	{
+		head->next->pre = node;
+	}
+	head->next = node;
+	return;
+}
+
+
+//尾插法
+void tailInsert(Node* head ,int num) //(Node* head , ElemType num)
+{	//默认头节点正常
+	//遍历至尾结点
+	Node* q = head;
+	while (q->next != NULL) 
+	{
+		q = q->next;
+	}
+	Node* node = new Node();
+	node->data = num;
+	node->next = NULL;
+	node->pre = q;
+	q->next = node;
+}
+
+//指定位置插入
+void insertNode(Node* head , int pos , int num)
+{	
+	Node* p = head;    //默认正常头结点，不判断
+	for (int i = 0; i < pos-1 ; i++)   //数据结构规定头结点是哨兵结点，不计入链表长度
+	{
+		p = p->next;  
+		if (p == NULL)
+		{
+			return;
+		}
+	}
+	Node* node = new Node();
+	node->data = num;
+	node->next = p->next;
+	node->pre = p;
+	if (p->next != NULL) { p->next->pre = node; }
+	p->next = node;
+}
+
+
+
+//指定位置删除
+void deleteNode(Node* head,int pos) 
+{
+	//移动 p 到第 pos-1 个节点（前驱）
+	Node* p = head; int i = 0;
+	while (i < pos - 1) 
+	{
+		p = p->next;
+		i++;
+		if (p == NULL) { return; }// pos 超出范围
+	}
+	Node* q = p->next;
+	if (q == NULL) { return; }   //pos超出链表长度
+	p->next = q->next;
+
+	if (q->next != NULL) { q->next->pre = p; }
+	delete q;
+	q = nullptr;
+}
