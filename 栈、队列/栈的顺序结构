@@ -1,0 +1,42 @@
+#include <iostream>
+using namespace std;
+#define MAXSIZE 100
+
+class Stack {
+public:
+    int data[MAXSIZE];
+    int top;
+};
+
+void initial(Stack* s) {
+    s->top = -1;
+}
+
+bool isEmpty(Stack* s) {
+    return s->top == -1;
+}
+
+void push(Stack* s, int num) {
+    if (s->top == MAXSIZE - 1) return;
+    s->data[++s->top] = num;
+}
+
+bool pop(Stack* s, int& num) {
+    if (isEmpty(s)) return false;
+    num = s->data[s->top--];
+    return true;
+}
+
+int main() {
+    Stack* s = new Stack();
+    initial(s);
+    push(s, 1);
+
+    int value;
+    if (pop(s, value)) {
+        cout << value << endl;   // 输出 1
+    }
+
+    delete s;
+    return 0;
+}
