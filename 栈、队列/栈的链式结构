@@ -1,0 +1,57 @@
+#include <iostream>
+using namespace std;
+
+class Stack 
+{
+public:
+	int data;    //ElemType data
+	Stack* next;  
+};
+
+Stack* initStack() 
+{
+	Stack* s = new Stack();
+	s->data = 0;
+	s->next = NULL;
+	return s;
+}
+
+int isEmpty(Stack* s)
+{
+	if (s->next == NULL)
+	{
+		cout << "栈为空" << endl;
+		return 1;
+	}
+	else 
+	{
+		return 0;
+	}
+}
+
+//进栈
+void push(Stack* s, int num)  //(Stack* s, ElemType num)
+{
+	Stack* stack = new Stack();
+	stack->data = num;
+	stack->next = s->next;
+	s->next = stack;
+	return;
+}
+
+//出栈
+void pop(Stack* s, int* num) //(Stack* s, ElemType* num)
+{
+	if (s->next == NULL) 
+	{
+		cout << "为空" << endl;
+		return;
+	}
+	*num = s->next->data;
+	Stack* q = s->next;
+	s->next = q->next;
+	delete q;
+	q = nullptr;
+	return;
+
+}	
