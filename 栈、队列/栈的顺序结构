@@ -53,3 +53,37 @@ int getTop(Stack *s, ElemType *e)
     *e = s->data[s->top];       // 通过指针返回栈顶元素的值
     return 1;                   // 返回 1 表示获取成功
 }
+
+
+
+//栈的顺序结构动态初始化
+typedef int ElemType;
+
+class Stack {
+public:
+    ElemType* data;
+    int top;
+};
+
+Stack* initStack() {
+    Stack* s = new Stack();
+    s->data = new ElemType[MAXSIZE];
+    s->top = -1;
+    return s;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
