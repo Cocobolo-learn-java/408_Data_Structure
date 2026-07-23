@@ -1,0 +1,71 @@
+#include <iostream>
+using namespace std;
+
+class QueueNode 
+{
+public:
+	QueueNode* next;
+	int data;  //ElemType data;
+};
+
+class Queue 
+{
+public:
+	QueueNode* front;
+	QueueNode* rear;
+};
+
+
+//初始化
+Queue* initialQueue()
+{
+	QueueNode* node = new QueueNode;
+	node->next = NULL;
+	node->data = 0;
+	//QueueNode* node = new QueueNode(); 一步到位
+	Queue* queue = new Queue;
+	queue->front = node;
+	queue->rear = node;
+	return queue;
+}
+
+
+//判空
+bool isEmpty(Queue* queue) 
+{
+	if (queue->front == queue->rear) 
+	{
+		return true;
+	}
+	else 
+	{
+		return false;
+	}
+}
+
+//入队
+void equeue(Queue* queue, int num)  //(Queue* queue, ElemType num)
+{
+	QueueNode* node = new QueueNode();    //创建队列结点
+	node->data = num;
+
+	queue->rear->next = node;
+	queue->rear = node;
+
+}
+
+//出队
+void oqueue(Queue* queue, int* num) 
+{
+	//队列链式结构的头结点不存储任何数据，因此删头结点之后的
+	QueueNode* temp = queue->front->next;
+	*num = temp->data;
+	queue->front->next = temp->next;
+	if (queue->rear == temp)  //若删除的是最有一个结点
+	{
+		queue->rear = queue->front; //则首尾指针共同指向一处
+	}
+
+	delete temp;
+	temp = NULL;
+}
