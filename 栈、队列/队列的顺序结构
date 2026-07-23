@@ -1,0 +1,86 @@
+#include <iostream>
+using namespace std;
+#define MAXSIZE 100
+class Queue 
+{
+public:
+	int data[MAXSIZE];
+	int front;
+	int rear;
+};
+
+//初始化队列
+void initQueue(Queue* Q) 
+{
+	Q->front = 0;   //首尾指针在一起
+	Q->rear = 0;
+}
+
+//判断队列是否为空
+int isEmpty(Queue* Q) 
+{
+	if (Q->front == Q->rear) 
+	{
+		cout << "队列为空" << endl;
+		return 1;
+	}
+	else
+	{
+		return 0;
+	}
+}
+
+
+//出队
+int inQueue(Queue* Q)
+{
+	if (Q->front == Q->rear) 
+	{
+		cout << "为空" << endl;
+		return 0;
+	}
+	int num = Q->data[Q->front];
+	Q->front++;
+	return num;
+}
+
+//入队的判断
+bool queueFull(Queue* Q) 
+{
+	if (Q->front != 0) 
+	{
+		int step = Q->front; //配置步长
+		for (int i = Q->front; i < Q->rear; i++) 
+		{
+			Q->data[i - step] = Q->data[i];
+		}
+		Q->front = 0;
+		Q->rear = Q->rear - step;
+		return false;
+	}
+	else 
+	{
+		cout << "队列已满" << endl;
+		return true;
+	}
+
+
+}
+
+//入队
+int equeue(Queue* Q, int num) 
+{
+	//判断队列是否已满
+	if (Q->rear >= MAXSIZE)
+	{
+		if (queueFull(Q)) 
+		{
+			return 0;
+		}
+
+	}
+	//队列未满，已调整队列顺序
+	Q->data[Q->rear] = num;
+	Q->rear++;
+	return 1;
+}
