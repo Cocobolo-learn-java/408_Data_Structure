@@ -105,9 +105,21 @@ Queue* initQueue()
 }
 
 
+//循环队列——入队
+void equeue(Queue* Q, ElemType num)
+{
+	if((Q->rear + 1) % MAXSIZE == Q->front)
+	{
+		cout << "循环队列已满" <<endl;
+		return;
+	}
+	Q->data[Q->rear] = num;
+	Q->rear = (Q->rear + 1) % MAXSIZE;
+	return;
+}
 
-
-
+//满队列：  (Q->rear + 1)% MAXSIZE == Q->front
+//队尾： (rear+1) % MAXSIZE
 
 
 
