@@ -84,3 +84,32 @@ int equeue(Queue* Q, int num)
 	Q->rear++;
 	return 1;
 }
+
+
+
+//队列顺序结构动态初始化
+class Queue{
+public:
+	ElemType* data;
+	int front;
+	int rear;
+};
+
+Queue* initQueue()
+{
+	Queue* queue = new Queue;
+	queue->data = new ElemType[MAXSIZE];
+	queue->rear =0;
+	queue->front =0;
+	return queue;
+}
+
+
+
+
+
+
+
+
+
+
