@@ -1,0 +1,120 @@
+#include <iostream>
+using namespace std;
+
+class TreeNode 
+{
+public:
+	int data;
+	TreeNode* lchild;
+	TreeNode* rchild;
+};
+using BiTree = TreeNode*;    
+
+
+//二叉树的遍历 - 前序遍历
+//先访问根结点，然后访问左分支上遇到的每一个结点，持续这一过程，直到遇到空结点为止。
+//这时，返回到最近的有右孩子的祖先结点，并从该结点的右孩子开始继续遍历。
+void preOrder(BiTree T) 
+{
+	if (T == NULL) 
+	{
+		return;
+	}
+	cout << T->data << endl;
+	preOrder(T->lchild);
+	preOrder(T->rchild);
+}
+/*
+ *           A
+ *         /   \
+ *        B      C
+ *       / \    /  \
+ *      D   E   F   G
+ *     /       /      \
+ *    H       I         J
+ *     \
+ *      K
+ */
+
+//前序遍历输出顺序：A B D H K E C F I G J
+
+
+//中序遍历
+//中序遍历的规则是：先遍历左子树，再访问根结点，最后遍历右子树。具体实现时，先沿着左分支向下遍历，
+//持续这一过程，直到遇到空结点为止。这时，返回到最近的一个祖先结点（即递归栈顶结点），访问该祖先结点，
+//然后从该结点的右孩子开始继续遍历（即进入右子树并重复上述沿左分支向下的过程）。
+void inOrder(BiTree T) 
+{
+	if (T == NULL ) 
+	{
+		return;
+	}
+	inOrder(T->lchild);
+	cout << T->data << endl;
+	inOrder(T ->rchild);
+
+}
+
+/*
+ *           A
+ *         /   \
+ *        B      C
+ *       / \    /  \
+ *      D   E   F   G
+ *     /       /      \
+ *    H       I         J
+ *     \
+ *      K
+ */
+
+ //中序遍历输出顺序：H K D B E A I F C G J
+
+
+
+//后序遍历
+//后序遍历的规则是：从根结点开始先访问结点的左右儿子，再对该结点进行访问。这就意味着结点的儿子将在该结点之前输出
+
+void postOrder(BiTree T) 
+{
+	if (T == NULL)
+	{
+		return;
+	}
+	inOrder(T->lchild);
+	inOrder(T->rchild);
+	cout << T->data << endl;
+}
+
+/*
+ *           A
+ *         /   \
+ *        B      C
+ *       / \    /  \
+ *      D   E   F   G
+ *     /       /      \
+ *    H       I         J
+ *     \
+ *      K
+ */
+
+ //后序遍历输出顺序：K H D E B I F J G C A 
+
+
+
+
+
+/*
+				A
+			  /   \
+			B       C
+		   / \     /
+		  D   E   F
+			 / \   \
+			G   H   I
+*/
+
+//前序输出：
+
+//中序输出：
+
+//后续输出：
