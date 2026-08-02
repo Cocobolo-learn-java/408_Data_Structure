@@ -1,0 +1,9 @@
+class ThreadNode
+{
+public:
+    ElemType data;
+    ThreadNode* lchild;
+    ThreadNode* rchild;
+    int ltag;
+    int rtag;
+};
