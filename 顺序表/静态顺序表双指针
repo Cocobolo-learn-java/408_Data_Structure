@@ -4,7 +4,7 @@ using namespace std;
 class SeqList {
 public:
 	int length;
-	int data[MAXSIZE];    //ElemType data[MAXSIZE];  #pragma once
+	int data[MAXSIZE];    //ElemType data[MAXSIZE]; 
 };
 
 
@@ -12,30 +12,39 @@ public:
 
 
 
-//-对长度为 n 的顺序表 L，编写一个时间复杂度为 O(n)、空间复杂度为 O(1) 的算法，该算法删除顺序表中所有值为 x 的数据元素。
-//
-//- 设计一个算法，从给定的顺序表 L 中删除元素值在 x 到 y(x <= y) 之间的所有元素，要求以较高的效率来实现，空间复杂度为 O(1)。
-//
-//- 从有序顺序表中删除所有其值重复的元素，使表中所有元素的值均不同。
-void deleteNumArea(SeqList& list,int x , int y) 
+//已知线性表 (a1, a2, ..., an) 按顺序结构存储且每个元素为不相等的整数，
+//设计把所有奇数移动到所有偶数前边的算法。
+//例如，A = (1, 2, 3, 4, 5, 6, 7)，移动后变为 A = (1, 7, 3, 5, 4, 6, 2)
+//（要求时间最少，辅助空间最少）。
+
+
+//解决思路：快排思想
+
+void oddEven(SeqList& list)
 {
-	int count = 0;
-	for (int i = 0; i < list.length; i++) 
+	int right = list.length-1;
+	int left = 0;
+	ElemType temp = list.data[left];
+	while(left < right)
 	{
-		if (list.data[i] >= x && list.data[i] <= y) 
+		while(left < right && list.data[right] %2 == 0)
 		{
-			count++;
+			right--;
 		}
-		else 
+		list.data[left] = list.data[right];
+		while(left < right && list.data[left] %2 != 0)
 		{
-			list.data[i - count] = list.data[i];
+			left++;
 		}
+		list.data[right] = list.data[left];
 	}
-	list.length -= count;
-
-
-
+	list.data[left] = temp;
 
 
 
 }
+
+
+
+
+
