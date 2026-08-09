@@ -73,12 +73,10 @@ void deleteNode(Node* head , int pos)  //(Node* head, ElemType pos)
 {	
 	//默认head不为NULL
 	Node* p = head;
-	int i = 0;
-	while (i < pos - 1)     
+	for(int i = 0; i< pos-1; i++ )
 	{
 		p = p->next;
-		i++;
-		if (p == NULL) { return; }  //判断pos大小是否合法
+		if(p == NULL){return;}
 	}
 	if (p->next == NULL) { cout << "要删除的位置错误" << endl; return; }  //判断要删除的节点是否存在
 	Node* q = p->next;
