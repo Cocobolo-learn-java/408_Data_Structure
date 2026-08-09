@@ -56,7 +56,7 @@ void insertNode(Node* head, int pos , int num) //(Node* head, int pos, ElemType 
 	//默认head不为NULL, (pos插入的位置是指头结点之后的整条链表具有的结点数)
 	Node* p = head;
 	int i = 0;
-	while (i < pos-1) 
+	while (i < pos)     //头结点不计算在链表长度内 
 	{
 		p = p->next;   //找到指定插入位置前的那个结点
 		i++;
