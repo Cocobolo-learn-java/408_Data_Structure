@@ -10,7 +10,7 @@ public:
 
 Stack* initStack() 
 {
-	Stack* s = new Stack();
+	Stack* s = new Stack;
 	s->data = 0;
 	s->next = NULL;
 	return s;
